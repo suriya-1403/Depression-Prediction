@@ -7,6 +7,8 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.preprocessing import sequence
 from sklearn.preprocessing import LabelEncoder
+from sklearn.impute import SimpleImputer
+from sklearn.model_selection import train_test_split
 
 #train set
 df_train = pd.read_csv('data/train.csv')
@@ -67,7 +69,7 @@ df_train['survey_date'] = encoded_train
 X = df_train.drop(["depressed"], axis=1)
 
 # fill missing values with mean column values
-imputer = Imputer()
+imputer = SimpleImputer()
 transformed_X = imputer.fit_transform(X)
 
 y = df_train.depressed
